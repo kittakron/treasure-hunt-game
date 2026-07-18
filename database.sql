@@ -3,8 +3,6 @@
 -- Import ไฟล์นี้เข้า phpMyAdmin / mysql CLI ก่อนใช้งานระบบ
 -- =========================================================
 
-CREATE DATABASE IF NOT EXISTS treasure_hunt CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE treasure_hunt;
 
 -- ---------- Settings (ตั้งค่าทั่วไปของเกม) ----------
 CREATE TABLE IF NOT EXISTS settings (
