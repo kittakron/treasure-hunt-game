@@ -1,1 +1,28 @@
+name: Deploy Treasure Hunt Game to Hosting
 
+# ทำงานอัตโนมัติทุกครั้งที่ push โค้ดเข้า branch main
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # กดรันเองได้จากแท็บ Actions บน GitHub ด้วย
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ดึงโค้ดจาก repo
+        uses: actions/checkout@v4
+
+      - name: อัปโหลดไฟล์ทั้งหมดขึ้นโฮสติ้งผ่าน FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./            # อัปโหลดทุกไฟล์ในโปรเจกต์นี้
+          server-dir: ./htdocs/    # โฟลเดอร์ปลายทางบนโฮสติ้ง (InfinityFree ใช้ htdocs)
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/README.md
